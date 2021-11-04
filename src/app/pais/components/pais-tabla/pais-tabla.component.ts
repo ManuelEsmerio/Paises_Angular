@@ -6,6 +6,13 @@ import { ColDef } from 'ag-grid-community';
   selector: 'app-pais-tabla',
   templateUrl: './pais-tabla.component.html',
   styles: [
+    `
+      ag-grid-angular{
+        height: 50vh;
+        min-height: 60vh;
+        max-height: 100vh;
+      }
+    `
   ]
 })
 export class PaisTablaComponent {

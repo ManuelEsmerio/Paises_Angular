@@ -1,1 +1,29 @@
-<p>region works!</p>
+<div class="animate__animated animate__fadeIn">
+  <h2>Busqueda por Region <small><b>{{ regionActiva | titlecase }}</b></small> </h2>
+  <hr>
+  <!-- [ngClass]="{
+  'btn-primary': regionActiva === region,
+  'btn-outline-secondary': regionActiva !== region
+}" -->
+
+  <div class="row">
+    <h5>Seleccionar la region</h5>
+    <div class="col">
+      <button [class]="getClassCSS(region)" *ngFor="let region of regiones;" (click)="activarRegion(region)">
+        {{ region | titlecase }}
+      </button>
+    </div>
+  </div>
+
+
+  <hr>
+  <div class="alert alert-danger" *ngIf="error">
+    No se encontro nada con el termino {{ termino |uppercase}}
+  </div>
+
+  <div *ngIf="rowData.length > 0" class="row">
+    <div class="col">
+      <app-pais-tabla [columnDefs]="columnDefs" [rowData]="rowData"></app-pais-tabla>
+    </div>
+  </div>
+</div>

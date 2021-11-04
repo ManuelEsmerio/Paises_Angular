@@ -18,24 +18,19 @@ import { TemplateRouterLinkGridComponent } from '../../components/template-route
   styles: [
   ]
 })
-export class CountryComponent {
+export class CountryComponent implements OnInit{
 
   termino:string = ""
   error: boolean = false;
 
-  columnDefs: ColDef[] = [
-    {headerName:'Bandera', field:'flags.svg', sortable:true, filter:true, cellRendererFramework: ImageGridComponent },
-    {headerName:'Official', field:'name.official', sortable:true, filter:true},
-    {headerName:'Nombre', field:'name.common', sortable:true, filter:true},
-    {headerName:'Población', field:'population', sortable:true, filter:true, cellRendererFramework: TemplateNumberGridComponent},
-    {headerName:'Area', field:'area', sortable:true, filter:true, cellRendererFramework: TemplateNumberGridComponent},
-    {headerName:'Continente', field:'continents', sortable:true, filter:true},
-    {headerName:'#', field:'cca3', sortable:true, filter:true, cellRendererFramework: TemplateRouterLinkGridComponent}
-  ]
-
+  columnDefs: ColDef[] = [];
   rowData:Country[] = []
 
   constructor(private service:PaisService){}
+
+  ngOnInit(): void {
+    this.columnDefs = this.service.columnDefs;
+  }
 
   buscar( termino: string ){
     this.error = false;
@@ -49,6 +44,11 @@ export class CountryComponent {
       this.rowData = [];
     }
     );
+  }
+
+  sugerencias( termino:string ){
+    this.error = false;
+    //TODO: crear sugerencias
   }
 
 }

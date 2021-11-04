@@ -7,6 +7,7 @@ import { RegionComponent } from './pais/pages/region/region.component';
 import { CapitalComponent } from './pais/pages/capital/capital.component';
 import { CurrencyComponent } from './pais/pages/currency/currency.component';
 import { ViewCountryComponent } from './pais/pages/view-country/view-country.component';
+import { ViewAllComponent } from './pais/pages/view-all/view-all.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path:'currency',
     component:CurrencyComponent
+  },
+  {
+    path:'all',
+    component:ViewAllComponent
   },
   {
     path:'pais/:id',

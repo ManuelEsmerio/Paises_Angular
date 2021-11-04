@@ -1,1 +1,22 @@
-<p>capital works!</p>
+<div class="animate__animated animate__fadeIn">
+  <h2>Busqueda por Capital</h2>
+  <hr>
+
+  <div class="row">
+    <div class="col">
+      <app-pais-input (onEnter)="buscar($event)" placeholder="Buscar Capital..."></app-pais-input>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="alert alert-danger" *ngIf="error">
+    No se encontro nada con el termino {{ termino |uppercase}}
+  </div>
+
+  <div *ngIf="rowData.length > 0" class="row">
+    <div class="col">
+      <app-pais-tabla [columnDefs]="columnDefs" [rowData]="rowData"></app-pais-tabla>
+    </div>
+  </div>
+</div>
