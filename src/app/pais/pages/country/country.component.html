@@ -9,6 +9,25 @@
     </div>
   </div>
 
+  <!-- Sugerencias -->
+  <ul *ngIf="validateResponse"
+    class="lits-group">
+    <li class="list-group-item list-group-item-action" *ngFor="let pais of paisesSugeridos" (click)="buscarCCA3(pais.cca3, pais.name.common)">
+      {{ pais.name.common }}  ({{ pais.name.official }})
+      <a [routerLink]="['/pais', pais.cca3]" class="btn btn-sm btn-primary view" href="">view</a>
+    </li>
+    <li class="list-group-item list-group-item-action" *ngIf="termino != ''" (click)="buscar(termino)">
+      Buscar "{{ termino }}"
+    </li>
+  </ul>
+
+  <!-- <ng-template #templateNotResult>
+    <ul class="lits-group">
+      <li class="list-group-item list-group-item-action">
+        No se encontraron resultados
+      </li>
+    </ul>
+  </ng-template> -->
   <hr>
 
   <div class="alert alert-danger" *ngIf="error">

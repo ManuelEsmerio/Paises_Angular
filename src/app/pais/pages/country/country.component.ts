@@ -1,30 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 
-// Custom Cell Format AnGrid
-import { ImageGridComponent } from '../../components/image-grid/image-grid.component';
-import { TemplateNumberGridComponent } from '../../components/template-number-grid/template-number-grid.component';
-
 // Custom Service
 import { PaisService } from '../../services/pais.service';
 
 // Custom Interface
 import { Country } from '../../interfaces/pais.interface';
-import { TemplateRouterLinkGridComponent } from '../../components/template-router-link-grid/template-router-link-grid.component';
 
 @Component({
   selector: 'app-country',
   templateUrl: './country.component.html',
   styles: [
+    `
+      li{
+        cursor:pointer;
+      }
+      .view{
+        float: right;
+      }
+    `
   ]
 })
 export class CountryComponent implements OnInit{
 
   termino:string = ""
   error: boolean = false;
+  validateResponse:boolean = false;
 
   columnDefs: ColDef[] = [];
   rowData:Country[] = []
+  paisesSugeridos : Country[] = [];
 
   constructor(private service:PaisService){}
 
@@ -34,6 +39,7 @@ export class CountryComponent implements OnInit{
 
   buscar( termino: string ){
     this.error = false;
+    this.validateResponse = false;
     this.termino = termino;
     this.service.buscarPais(this.termino)
     .subscribe( (item) => {
@@ -46,9 +52,33 @@ export class CountryComponent implements OnInit{
     );
   }
 
+
+  buscarCCA3(cca3:string, name:string){
+    this.error = false;
+    this.validateResponse = false;
+    this.service.buscarPaisPorCode(cca3)
+    .subscribe( (item) => {
+      this.rowData = item;
+    },
+    (err) => {
+      this.error = true;
+      this.rowData = [];
+    }
+    );
+  }
+
   sugerencias( termino:string ){
     this.error = false;
-    //TODO: crear sugerencias
+    this.validateResponse = true;
+    this.termino = termino;
+    this.service.buscarPais(termino)
+    .subscribe(
+      paises => {
+        this.paisesSugeridos = paises.splice(0,5);
+      },
+      (err) => {
+        this.paisesSugeridos = [];
+      });
   }
 
 }
