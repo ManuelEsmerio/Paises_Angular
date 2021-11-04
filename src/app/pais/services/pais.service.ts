@@ -21,6 +21,7 @@ export class PaisService {
 
   private apiUrl:string = 'https://restcountries.com/v3.1';
 
+  // cellEditorFramework
   private _columnDefs: ColDef[] = [
     {headerName:'Bandera', field:'flags.svg', sortable:true, filter:true, cellRendererFramework: ImageGridComponent, checkboxSelection:true },
     {headerName:'Official', field:'name.official', sortable:true, filter:true},

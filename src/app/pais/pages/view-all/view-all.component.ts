@@ -3,6 +3,8 @@ import { ColDef } from 'ag-grid-community';
 import { PaisService } from '../../services/pais.service';
 import { Country } from '../../interfaces/pais.interface';
 
+
+//TODO: Agregar agrupaciones por region y lenguajes de manera dinamica.
 @Component({
   selector: 'app-view-all',
   templateUrl: './view-all.component.html',

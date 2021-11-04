@@ -9,8 +9,11 @@ import { Languages } from '../../interfaces/pais.interface';
 })
 export class TemplateLanguageGridComponent{
 
-  agInit( params:any ):void{
+  value:any;
 
+  agInit( params:any ):void{
+    // Object.values regresa los valores del Json como un arreglo.
+    this.value = Object.values(params.value).join(", ");
   }
 
 }
